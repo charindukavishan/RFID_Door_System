@@ -1,8 +1,6 @@
-var express = require('express');
-var app = express();
+var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var router = express.Router();
 const routers = require('./routes/router.index')
 
 // router directing files
