@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-index.html
+backend/node_modules
+backend/index.html
+
+#frontend/node_modules
