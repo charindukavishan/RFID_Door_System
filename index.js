@@ -2,6 +2,7 @@ var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const routers = require('./routes/router.index')
+require('./config/db');
 
 // router directing files
 app.use('/api', routers);
