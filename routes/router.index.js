@@ -3,6 +3,7 @@ const router = express.Router();
 
 const ctrlAdmin = require('../controllers/admin.controller');
 const doorCtrl = require('../controllers/doors.controller');
+const studentCtrl = require('../controllers/student.controller');
 
 router.get('/admin', ctrlAdmin.admin);
 
@@ -60,6 +61,8 @@ router.post('/doorlock', doorCtrl.LockDoor);
 
 //TODO crud user
 
+router.post('/register', studentCtrl.register);
+router.get('/allstudents', studentCtrl.AllStudents);
 // --- POST Requests ---
 //---------------------------------------------------------------------------------------------------------------------------------------
 
