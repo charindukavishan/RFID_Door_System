@@ -4,9 +4,11 @@ const router = express.Router();
 const ctrlAdmin = require('../controllers/admin.controller');
 const doorCtrl = require('../controllers/doors.controller');
 const studentCtrl = require('../controllers/student.controller');
+const accessCtrl = require('../controllers/accessGrant.controller');
 
 router.get('/admin', ctrlAdmin.admin);
 router.post('/login',ctrlAdmin.login);
+router.post('/getaccess', accessCtrl.allowAccess);
 
 // **** DOORS ****
 
