@@ -6,6 +6,7 @@ const doorCtrl = require('../controllers/doors.controller');
 const studentCtrl = require('../controllers/student.controller');
 
 router.get('/admin', ctrlAdmin.admin);
+router.post('/login',ctrlAdmin.login);
 
 // **** DOORS ****
 
