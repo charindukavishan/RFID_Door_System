@@ -82,7 +82,7 @@ class Index extends React.Component {
                       <h6 className="text-uppercase text-light ls-1 mb-1">
                         Overview
                       </h6>
-                      <h2 className="text-white mb-0">Sales value</h2>
+                      <h2 className="text-white mb-0">Session Details</h2>
                     </div>
                     <div className="col">
                       <Nav className="justify-content-end" pills>
@@ -94,7 +94,7 @@ class Index extends React.Component {
                             href="#pablo"
                             onClick={e => this.toggleNavs(e, 1)}
                           >
-                            <span className="d-none d-md-block">Month</span>
+                            <span className="d-none d-md-block">Edit</span>
                             <span className="d-md-none">M</span>
                           </NavLink>
                         </NavItem>
@@ -107,7 +107,7 @@ class Index extends React.Component {
                             href="#pablo"
                             onClick={e => this.toggleNavs(e, 2)}
                           >
-                            <span className="d-none d-md-block">Week</span>
+                            <span className="d-none d-md-block">Delete</span>
                             <span className="d-md-none">W</span>
                           </NavLink>
                         </NavItem>

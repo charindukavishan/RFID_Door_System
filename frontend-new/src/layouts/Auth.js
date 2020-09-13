@@ -59,7 +59,7 @@ class Auth extends React.Component {
                 <Row className="justify-content-center">
                   <Col lg="5" md="6">
                     <h1 className="text-white">Welcome!</h1>
-                    <h2 className="text-white">Door access system</h2>
+                    <h2 className="text-white">RFID Door System</h2>
                   </Col>
                 </Row>
               </div>
