@@ -15,20 +15,31 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Index from "views/Index.js";
-import Profile from "views/examples/Profile.js";
-import Maps from "views/examples/Maps.js";
-import Register from "views/examples/Register.js";
+import Dashboard from "views/Dashboard.js";
+import SessionCreate from "views/examples/SessionCreate.js";
+import GroupCreate from "views/examples/GroupCreate.js";
 import Login from "views/examples/Login.js";
-import Tables from "views/examples/Tables.js";
-import Icons from "views/examples/Icons.js";
 
 var routes = [
   {
-    path: "/index",
+    path: "/dashboard",
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
-    component: Index,
+    component: Dashboard,
+    layout: "/admin"
+  },
+  {
+    path: "/create-group",
+    name: "Create Group",
+    icon: "ni ni-single-02 text-warning",
+    component: GroupCreate,
+    layout: "/admin"
+  },
+  {
+    path: "/create-session",
+    name: "Create Session",
+    icon: "ni ni-calendar-grid-58 text-success",
+    component: SessionCreate,
     layout: "/admin"
   },
   {

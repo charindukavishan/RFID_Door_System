@@ -41,7 +41,7 @@ class AdminNavbar extends React.Component {
           <Container className="px-4">
             <NavbarBrand to="/" tag={Link}>
 
-              <h1 className="text-white">Tharuja</h1>
+              <h1 className="text-white">Embedded Encoder</h1>
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar-collapse-main">
               <span className="navbar-toggler-icon" />

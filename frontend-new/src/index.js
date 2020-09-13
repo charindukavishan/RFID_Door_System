@@ -26,14 +26,14 @@ import "assets/scss/argon-dashboard-react.scss";
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
-let isLoggedIn=false
+let isLoggedIn=true
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/admin" render={props => <AdminLayout {...props} />} />
       <Route path="/auth" render={props => <AuthLayout {...props} />} />
-        {isLoggedIn? <Redirect from="/" to="/admin/index" />: <Redirect from="/" to="/auth/login" />}
+        {isLoggedIn? <Redirect from="/" to="/admin/dashboard" />: <Redirect from="/" to="/auth/login" />}
 
     </Switch>
   </BrowserRouter>,
