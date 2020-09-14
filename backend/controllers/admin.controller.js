@@ -11,10 +11,10 @@ module.exports.login = (req, res) => {
     }
 
         //Test username password
-        // if (body.username==='admin' && body.password==='admin@123'){
-        //     console.log(req.body)
-        //     return res.status(200).json({ status: true, message: 'success' });
-        // }
+        if (body.username==='admin' && body.password==='admin@123'){
+            console.log(req.body)
+            return res.status(200).json({ status: true, message: 'success' });
+        }
     
 
     connection.query(

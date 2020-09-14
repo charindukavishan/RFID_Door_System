@@ -32,7 +32,7 @@ import {
   Row,
   Col
 } from "reactstrap";
-import {LoginTestMode, LoginUrl} from "../../api";
+import {LOGGED_IN_KEY, LoginTestMode, LoginUrl} from "../../api";
 
 class Login extends React.Component {
 
@@ -99,6 +99,7 @@ class Login extends React.Component {
                     console.log("login details",{username:this.state.username,password:this.state.password})
 
                     if(LoginTestMode) {
+                      localStorage.setItem(LOGGED_IN_KEY,'true')
                       this.props.history.push('/admin/dashboard')
                       return
                     }
@@ -113,8 +114,11 @@ class Login extends React.Component {
                     };
                     fetch(LoginUrl,requestOptions).then(res=>{
                       console.log(res)
-                      if(res.status && res.status===200)
+                      if(res.status && res.status===200) {
+                        localStorage.setItem(LOGGED_IN_KEY,'true')
                         this.props.history.push('/admin/dashboard')
+                        return
+                      }
                       else
                         alert("Login error")
                     }).catch(err=>console.log(err))

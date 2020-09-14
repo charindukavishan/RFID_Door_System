@@ -25,6 +25,7 @@ import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
+import {LOGGED_IN_KEY} from "../api";
 
 class Admin extends React.Component {
   componentDidUpdate(e) {
@@ -32,6 +33,16 @@ class Admin extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.mainContent.scrollTop = 0;
   }
+
+  componentDidMount() {
+    let isLoggedIn=localStorage.getItem(LOGGED_IN_KEY)
+
+    //Check Login
+    if(isLoggedIn!=='true'){
+      this.props.history.push('/auth/login')
+    }
+  }
+
   getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
