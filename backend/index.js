@@ -5,8 +5,13 @@ const bodyParser = require('body-parser');
 const routers = require('./routes/router.index')
 require('./config/db');
 
+const cors= require("cors")
+
 // middleware
 app.use(bodyParser.json());
+
+//Cors
+app.use(cors())
 // router directing files
 app.use('/api', routers);
 

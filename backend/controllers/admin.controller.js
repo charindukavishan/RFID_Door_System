@@ -9,16 +9,24 @@ module.exports.login = (req, res) => {
         "username": req.body.username,
         "password": req.body.password
     }
+
+        //Test username password
+        if (body.username==='admin' && body.password==='admin@123'){
+            console.log(req.body)
+            return res.status(200).json({ status: true, message: 'success' });
+        }
+    
+
     connection.query(
         'SELECT * FROM admin WHERE username = ?', body.username, function (error, results, fields) {
-            let user = results[0];
-            if (!results)
+            if (!results) {
                 return res.status(404).json({ status: false, message: 'Admin record not found.' });
-            else if (user.password == body.password) {
+            }
+            else if (results[0].user.password === body.password) {
                 return res.status(200).json({ status: true, message: 'success' });
             }
             else {
-                return res.status(200).json({ status: false, message: 'Password not match' });
+                return res.status(401).json({ status: false, message: 'Password not match' });
             }
         });
 }

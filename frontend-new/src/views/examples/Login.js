@@ -32,8 +32,23 @@ import {
   Row,
   Col
 } from "reactstrap";
+import {LoginTestMode, LoginUrl} from "../../api";
 
 class Login extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {username: '',password:''};
+  }
+
+  handleUsernameChange = (event) => {
+    this.setState({username: event.target.value});
+  }
+
+  handlePasswordChange = (event) =>{
+    this.setState({password: event.target.value});
+  }
+
   render() {
     return (
       <>
@@ -52,7 +67,7 @@ class Login extends React.Component {
                         <i className="ni ni-email-83" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Email" type="email" autoComplete="new-email"/>
+                    <Input placeholder="Username" value={this.state.username} onChange={this.handleUsernameChange}/>
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -62,7 +77,7 @@ class Login extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password" autoComplete="new-password"/>
+                    <Input placeholder="Password" type="password" autoComplete="new-password" value={this.state.password} onChange={this.handlePasswordChange} />
                   </InputGroup>
                 </FormGroup>
                 <div className="custom-control custom-control-alternative custom-checkbox">
@@ -79,8 +94,32 @@ class Login extends React.Component {
                   </label>
                 </div>
                 <div className="text-center">
-                  <Button className="my-4" color="primary" type="button" onClick={()=>{console.log("Login")}}>
-                    Sign in
+                <Button className="my-4" color="primary" type="button" onClick={()=>{
+
+                    console.log("login details",{username:this.state.username,password:this.state.password})
+
+                    if(LoginTestMode) {
+                      this.props.history.push('/admin/dashboard')
+                      return
+                    }
+
+                    const requestOptions = {
+                      method: 'POST',
+                      headers:  {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({username:this.state.username,password:this.state.password})
+                    };
+                    fetch(LoginUrl,requestOptions).then(res=>{
+                      console.log(res)
+                      if(res.status && res.status===200)
+                        this.props.history.push('/admin/dashboard')
+                      else
+                        alert("Login error")
+                    }).catch(err=>console.log(err))
+                    }}>
+                    Login
                   </Button>
                 </div>
               </Form>
