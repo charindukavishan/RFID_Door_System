@@ -128,8 +128,8 @@ class Sidebar extends React.Component {
           {/* Brand */}
           {logo ? (
             <NavbarBrand className="pt-0" {...navbarBrandProps}>
-
-              <h1 className="text-blue">Door System</h1>
+              <h1 className="text-blue">RFID Door</h1>
+              <h1 className="text-blue">Access System</h1>
 
             </NavbarBrand>
           ) : null}

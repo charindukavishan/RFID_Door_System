@@ -77,7 +77,10 @@ class AdminNavbar extends React.Component {
                   </Media>
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-arrow" right>
-                  <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+                <DropdownItem href="#pablo" onClick={e => {
+                    localStorage.clear()
+                    this.props.history.push('/auth/login')
+                  }}>
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
                   </DropdownItem>

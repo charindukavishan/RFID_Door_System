@@ -25,10 +25,17 @@ import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 
 import routes from "routes.js";
+import {LOGGED_IN_KEY} from "../api";
 
 class Auth extends React.Component {
   componentDidMount() {
     document.body.classList.add("bg-default");
+
+    //Check Login
+    let isLoggedIn=localStorage.getItem(LOGGED_IN_KEY)
+    if(isLoggedIn==='true'){
+      this.props.history.push('/admin/dashboard')
+    }
   }
   componentWillUnmount() {
     document.body.classList.remove("bg-default");
@@ -59,7 +66,7 @@ class Auth extends React.Component {
                 <Row className="justify-content-center">
                   <Col lg="5" md="6">
                     <h1 className="text-white">Welcome!</h1>
-                    <h2 className="text-white">RFID Door System</h2>
+                    <h1 className="text-white">RFID Door Access System</h1>
                   </Col>
                 </Row>
               </div>
