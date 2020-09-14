@@ -19,7 +19,8 @@ module.exports.login = (req, res) => {
 
     connection.query(
         'SELECT * FROM admin WHERE username = ?', body.username, function (error, results, fields) {
-            if (!results) {
+            
+            if (!results[0]) {
                 return res.status(404).json({ status: false, message: 'Admin record not found.' });
             }
             else if (results[0].password === body.password) {
