@@ -26,34 +26,39 @@ import { Line, Bar } from "react-chartjs-2";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
-  NavItem,
-  NavLink,
-  Nav,
-  Progress,
-  Table,
   Container,
   Row,
-  Col
+  Col,
+  CardTitle,
+  Modal
 } from "reactstrap";
 
 // core components
 import {
   chartOptions,
   parseOptions,
-  chartExample1,
-  chartExample2
 } from "variables/charts.js";
 
-import Header from "components/Headers/Header.js";
+//import Header from "components/Headers/Header.js";
 
 class Index extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       activeNav: 1,
-      chartExample1Data: "data1"
+      chartExample1Data: "data1",
+      sessions:[{id:"1",venue:"ERP lab",date:"2020-10-19", status:false},
+      {id:"2",venue:"Lecture hall-2",date:"2020-10-12", status:true},
+      {id:"3",venue:"Hardware lab", date:"2020-10-15",status:false},
+      {id:"4",venue:"New building auditorium",date:"2020-10-18", status:false},
+      {id:"5",venue:"Parawiya hall", date:"2020-10-22",status:true},
+      ],
+      viewSessionId : "",
+      viewSessionVenue : "",
+      viewSessionDate : "",
+      viewSessionStatus : ""  ,
+      exampleModal: false 
     };
     if (window.Chart) {
       parseOptions(Chart, chartOptions());
@@ -67,66 +72,106 @@ class Index extends React.Component {
         this.state.chartExample1Data === "data1" ? "data2" : "data1"
     });
   };
+
+  toggleModal = (state,sessionID,sessionVenue,sessionDate,sessionStatus) => {
+    this.setState({
+      [state]: !this.state[state],
+      viewSessionId:sessionID,
+      viewSessionVenue:sessionVenue,
+      viewSessionDate:sessionDate,
+      viewSessionStatus:sessionStatus
+    });
+  };
+
   render() {
+    const sessionList = this.state.sessions.map((session) =>
+    <Col lg="6" xl="3">
+    <Card className="card-stats mb-4 mb-xl-0">
+      <CardBody>
+        <Row>
+          <div className="col">
+            <CardTitle
+              tag="h5"
+              className="text-uppercase text-muted mb-0"
+            >
+             <Button className="my-4" color="primary" type="button" onClick={() => this.toggleModal("exampleModal",session.id,session.venue,session.date,session.status)}>
+                Session {session.id} </Button> 
+            </CardTitle>
+            <span className="h2 font-weight-bold mb-0">
+              {session.status}
+            </span>
+          </div>
+          <Col className="col-auto">
+            <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
+              <i className="ni ni-album-2" />
+            </div>
+          </Col>
+        </Row>
+        <p className="mt-3 mb-0 text-muted text-sm">
+          <span className="text-success mr-2">
+            <i className="fa fa-arrow-up" /> {session.venue}
+          </span>{" "}
+          <span className="text-nowrap">{session.date}</span>
+        </p>
+      </CardBody>
+    </Card>
+  </Col>
+
+    );
+
+
     return (
       <>
-        <Header />
-        {/* Page content */}
-        <Container className="mt--7" fluid>
-          <Row>
-            <Col className="mb-5 mb-xl-0" xl="8">
-              <Card className="bg-gradient-default shadow">
-                <CardHeader className="bg-transparent">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h6 className="text-uppercase text-light ls-1 mb-1">
-                        Overview
-                      </h6>
-                      <h2 className="text-white mb-0">Session Details</h2>
-                    </div>
-                    <div className="col">
-                      <Nav className="justify-content-end" pills>
-                        <NavItem>
-                          <NavLink
-                            className={classnames("py-2 px-3", {
-                              active: this.state.activeNav === 1
-                            })}
-                            href="#pablo"
-                            onClick={e => this.toggleNavs(e, 1)}
-                          >
-                            <span className="d-none d-md-block">Edit</span>
-                            <span className="d-md-none">M</span>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink
-                            className={classnames("py-2 px-3", {
-                              active: this.state.activeNav === 2
-                            })}
-                            data-toggle="tab"
-                            href="#pablo"
-                            onClick={e => this.toggleNavs(e, 2)}
-                          >
-                            <span className="d-none d-md-block">Delete</span>
-                            <span className="d-md-none">W</span>
-                          </NavLink>
-                        </NavItem>
-                      </Nav>
-                    </div>
-                  </Row>
-                </CardHeader>
-                <CardBody>
-                  {/* Chart */}
-                  <div className="chart">
+        {/* Card List */}
+        <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
+          <Container fluid>
+            <div className="header-body">
+              {/* Card stats */}
+              <Row>
 
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
+                {sessionList}
 
-          </Row>
-
-        </Container>
+              </Row>
+            </div>
+          </Container>
+        </div>
+        
+        {/* Modal */}
+        <Modal
+          className="modal-dialog-centered"
+          isOpen={this.state.exampleModal}
+          toggle={() => this.toggleModal("exampleModal")}
+        >
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">
+              {this.state.viewSessionId}
+            </h5>
+            <button
+              aria-label="Close"
+              className="close"
+              data-dismiss="modal"
+              type="button"
+              onClick={() => this.toggleModal("exampleModal")}
+            >
+              <span aria-hidden={true}>×</span>
+            </button>
+          </div>
+          <div className="modal-body">
+          {this.state.viewSessionDate}
+          {this.state.viewSessionVenue}
+          {this.state.viewSessionStatus}
+          </div>
+          <div className="modal-footer">
+            <Button
+              color="primary"
+              data-dismiss="modal"
+              type="button"
+              onClick={() => this.toggleModal("exampleModal")}
+            >
+              Close
+            </Button>
+          </div>
+        </Modal>
       </>
     );
   }
