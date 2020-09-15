@@ -5,6 +5,7 @@ const ctrlAdmin = require('../controllers/admin.controller');
 const doorCtrl = require('../controllers/doors.controller');
 const studentCtrl = require('../controllers/student.controller');
 const accessCtrl = require('../controllers/accessGrant.controller');
+const groupCtrl = require('../controllers/group.controller');
 
 router.get('/admin', ctrlAdmin.admin);
 router.post('/login',ctrlAdmin.login);
@@ -73,13 +74,16 @@ router.get('/allstudents', studentCtrl.AllStudents);
 
 
 
-// **** LOG ****
+// **** Groups ****
 // --- Get Requests ---
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 //TODO LOG
 
 // --- POST Requests ---
+
+router.post('/create-group', groupCtrl.Create);
+
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------------------------------------------------------------------
