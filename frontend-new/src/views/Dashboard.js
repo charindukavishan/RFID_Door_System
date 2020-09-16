@@ -155,7 +155,9 @@ class Index extends React.Component {
           <div className="modal-body">
           <h4> Date - {this.state.viewSessionDate}  </h4><br/>
           <h4> Venue - {this.state.viewSessionVenue} </h4> <br/>
-          <h4> Allowed people - </h4>
+          <h4> Lecturer - </h4>
+          <h4> No of students - </h4>
+          <h4> Allowed students - </h4>
           </div>
           <div className="modal-footer">
             <Button
