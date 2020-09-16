@@ -48,16 +48,15 @@ class Index extends React.Component {
     this.state = {
       activeNav: 1,
       chartExample1Data: "data1",
-      sessions:[{id:"1",venue:"ERP lab",date:"2020-10-19", status:false},
-      {id:"2",venue:"Lecture hall-2",date:"2020-10-12", status:true},
-      {id:"3",venue:"Hardware lab", date:"2020-10-15",status:false},
-      {id:"4",venue:"New building auditorium",date:"2020-10-18", status:false},
-      {id:"5",venue:"Parawiya hall", date:"2020-10-22",status:true},
+      sessions:[{name:"Java lab session",venue:"ERP lab",date:"2020-10-19"},
+      {name:"ANN lecture",venue:"Lecture hall-2",date:"2020-10-12"},
+      {name:"Embedded lab session",venue:"Hardware lab", date:"2020-10-15"},
+      {name:"SAIT lecture",venue:"New building auditorium",date:"2020-10-18"},
+      {name:"MPI lecture",venue:"Parawiya hall", date:"2020-10-22"},
       ],
-      viewSessionId : "",
+      viewSessionName : "",
       viewSessionVenue : "",
       viewSessionDate : "",
-      viewSessionStatus : ""  ,
       exampleModal: false 
     };
     if (window.Chart) {
@@ -73,13 +72,12 @@ class Index extends React.Component {
     });
   };
 
-  toggleModal = (state,sessionID,sessionVenue,sessionDate,sessionStatus) => {
+  toggleModal = (state,sessionName,sessionVenue,sessionDate) => {
     this.setState({
       [state]: !this.state[state],
-      viewSessionId:sessionID,
+      viewSessionName:sessionName,
       viewSessionVenue:sessionVenue,
       viewSessionDate:sessionDate,
-      viewSessionStatus:sessionStatus
     });
   };
 
@@ -94,12 +92,9 @@ class Index extends React.Component {
               tag="h5"
               className="text-uppercase text-muted mb-0"
             >
-             <Button className="my-4" color="primary" type="button" onClick={() => this.toggleModal("exampleModal",session.id,session.venue,session.date,session.status)}>
-                Session {session.id} </Button> 
+             <Button className="my-4" color="primary" type="button" onClick={() => this.toggleModal("exampleModal",session.name,session.venue,session.date)}>
+                {session.name} </Button> 
             </CardTitle>
-            <span className="h2 font-weight-bold mb-0">
-              {session.status}
-            </span>
           </div>
           <Col className="col-auto">
             <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -115,6 +110,7 @@ class Index extends React.Component {
         </p>
       </CardBody>
     </Card>
+    <br/>
   </Col>
 
     );
@@ -143,9 +139,9 @@ class Index extends React.Component {
           toggle={() => this.toggleModal("exampleModal")}
         >
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
-              {this.state.viewSessionId}
-            </h5>
+            <h2 className="modal-title" id="exampleModalLabel">
+              {this.state.viewSessionName}
+            </h2>
             <button
               aria-label="Close"
               className="close"
@@ -157,13 +153,13 @@ class Index extends React.Component {
             </button>
           </div>
           <div className="modal-body">
-          {this.state.viewSessionDate}
-          {this.state.viewSessionVenue}
-          {this.state.viewSessionStatus}
+          <h4> Date - {this.state.viewSessionDate}  </h4><br/>
+          <h4> Venue - {this.state.viewSessionVenue} </h4> <br/>
+          <h4> Allowed people - </h4>
           </div>
           <div className="modal-footer">
             <Button
-              color="primary"
+              color="danger"
               data-dismiss="modal"
               type="button"
               onClick={() => this.toggleModal("exampleModal")}
