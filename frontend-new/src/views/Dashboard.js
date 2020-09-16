@@ -157,7 +157,7 @@ class Index extends React.Component {
           <h4> Venue - {this.state.viewSessionVenue} </h4> <br/>
           <h4> Lecturer - </h4>
           <h4> No of students - </h4>
-          <h4> Allowed students - </h4>
+          <h4> Allowed student group - </h4>
           </div>
           <div className="modal-footer">
             <Button
