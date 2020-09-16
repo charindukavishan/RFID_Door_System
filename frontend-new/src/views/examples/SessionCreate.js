@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-
+import ReactDatetime from "react-datetime";
 // reactstrap components
 import {
   Button,
@@ -28,7 +28,11 @@ import {
   Input,
   Container,
   Row,
-  Col
+  Col,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Label
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
@@ -63,7 +67,7 @@ class Profile extends React.Component {
                 <CardBody>
                   <Form>
                     <h6 className="heading-small text-muted mb-4">
-                      User information
+                      Session information
                     </h6>
                     <div className="pl-lg-4">
                       <Row>
@@ -73,95 +77,61 @@ class Profile extends React.Component {
                               className="form-control-label"
                               htmlFor="input-username"
                             >
-                              Username
+                              Session Name
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="lucky.jesse"
+                              defaultValue="Lecture Name"
                               id="input-username"
                               placeholder="Username"
                               type="text"
                             />
                           </FormGroup>
                         </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-email"
-                            >
-                              Email address
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-email"
-                              placeholder="jesse@example.com"
-                              type="email"
-                            />
-                          </FormGroup>
-                        </Col>
                       </Row>
                       <Row>
                         <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-date"
+                              >
+                                Date
+                              </label>
+                              <InputGroup className="input-group-alternative">
+                                <InputGroupAddon addonType="prepend">
+                                  <InputGroupText>
+                                    <i className="ni ni-calendar-grid-58" />
+                                  </InputGroupText>
+                                </InputGroupAddon>
+                                <ReactDatetime
+                                  inputProps={{
+                                    placeholder: "Date Picker Here"
+                                  }}
+                                  timeFormat={false}
+                                />
+                              </InputGroup>
+                           </FormGroup>
+                        </Col>
+                        </Row>
+                        <Row>
+                        <Col lg="4">
                           <FormGroup>
                             <label
                               className="form-control-label"
-                              htmlFor="input-first-name"
+                              htmlFor="input-city"
                             >
-                              First name
+                              Venue
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Lucky"
-                              id="input-first-name"
-                              placeholder="First name"
+                              defaultValue="Lecture Hall"
+                              id="input-venue"
+                              placeholder="City"
                               type="text"
                             />
                           </FormGroup>
-                        </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-last-name"
-                            >
-                              Last name
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              defaultValue="Jesse"
-                              id="input-last-name"
-                              placeholder="Last name"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </div>
-                    <hr className="my-4" />
-                    {/* Address */}
-                    <h6 className="heading-small text-muted mb-4">
-                      Contact information
-                    </h6>
-                    <div className="pl-lg-4">
-                      <Row>
-                        <Col md="12">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-address"
-                            >
-                              Address
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                              id="input-address"
-                              placeholder="Home Address"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
+                          </Col>
                       </Row>
                       <Row>
                         <Col lg="4">
@@ -170,67 +140,51 @@ class Profile extends React.Component {
                               className="form-control-label"
                               htmlFor="input-city"
                             >
-                              City
+                              Lecturer
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="New York"
-                              id="input-city"
+                              defaultValue="Lecturer Name"
+                              id="input-lecturer"
                               placeholder="City"
                               type="text"
                             />
                           </FormGroup>
-                        </Col>
+                          </Col>
+                      </Row>
+                      <Row>
                         <Col lg="4">
                           <FormGroup>
                             <label
                               className="form-control-label"
-                              htmlFor="input-country"
+                              htmlFor="input-city"
                             >
-                              Country
+                              No of Students 
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="United States"
-                              id="input-country"
-                              placeholder="Country"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="4">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-country"
-                            >
-                              Postal code
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-postal-code"
-                              placeholder="Postal code"
+                              defaultValue="10"
+                              id="input-student-no"
+                              placeholder="xx"
                               type="number"
                             />
                           </FormGroup>
-                        </Col>
+                          </Col>
                       </Row>
-                    </div>
-                    <hr className="my-4" />
-                    {/* Description */}
-                    <h6 className="heading-small text-muted mb-4">About me</h6>
-                    <div className="pl-lg-4">
-                      <FormGroup>
-                        <label>About Me</label>
-                        <Input
-                          className="form-control-alternative"
-                          placeholder="A few words about you ..."
-                          rows="4"
-                          defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                          Open Source."
-                          type="textarea"
-                        />
-                      </FormGroup>
+                      <Row>
+                        <Col lg="4">
+                        <FormGroup>
+                          <Label for="exampleSelect">Allowed Student Group</Label>
+                          <Input type="select" name="select" id="exampleSelect">
+                            <option>Batch 19</option>
+                            <option>Batch 18</option>
+                            <option>Batch 17</option>
+                            <option>Batch 16</option>
+                            <option>Batch 15</option>
+                          </Input>
+                        </FormGroup>
+                          </Col>
+                      </Row>
                     </div>
                   </Form>
                 </CardBody>
