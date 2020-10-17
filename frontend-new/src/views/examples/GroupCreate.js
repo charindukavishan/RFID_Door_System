@@ -34,7 +34,25 @@ import {
 import UserHeader from "components/Headers/UserHeader.js";
 
 class Profile extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      allStudents: ["164121J","164132T","164189X"]
+    }
+  }  
   render() {
+    const studentList = this.state.allStudents.map((student,idex) =>
+      <div className="custom-control custom-checkbox mb-3">
+      <input
+        className="custom-control-input"
+        id={idex}
+        type="checkbox"
+      />
+      <label className="custom-control-label" htmlFor={idex}>
+        {student}
+      </label> <br/>
+      </div>
+    );
     return (
       <>
         <UserHeader />
@@ -85,37 +103,7 @@ class Profile extends React.Component {
                           </FormGroup>
                         </Col>
                       </Row>
-                      <Row>
-                      <div className="custom-control custom-checkbox mb-3">
-                        <input
-                          className="custom-control-input"
-                          defaultChecked
-                          id="customCheck2"
-                          type="checkbox"
-                        />
-                        <label className="custom-control-label" htmlFor="customCheck2">
-                          164121J
-                        </label>  <br/>
-                        <input
-                          className="custom-control-input"
-                          defaultChecked
-                          id="customCheck1"
-                          type="checkbox"
-                        />
-                        <label className="custom-control-label" htmlFor="customCheck1">
-                          164132T
-                        </label>  <br/>
-                        <input
-                          className="custom-control-input"
-                          defaultChecked
-                          id="customCheck3"
-                          type="checkbox"
-                        />
-                        <label className="custom-control-label" htmlFor="customCheck3">
-                          164189X
-                        </label>  <br/>
-                      </div>
-                      </Row>
+                      {studentList}
                     </div>
                   </Form>
                 </CardBody>
