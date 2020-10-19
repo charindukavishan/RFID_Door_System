@@ -31,7 +31,13 @@ import {
   Row,
   Col,
   CardTitle,
-  Modal
+  Modal,
+  Form,
+  FormGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input,
+  InputGroup,
 } from "reactstrap";
 
 // core components
@@ -48,21 +54,28 @@ class Index extends React.Component {
     this.state = {
       activeNav: 1,
       chartExample1Data: "data1",
-      sessions:[{name:"Java lab session",venue:"ERP lab",date:"2020-10-19"},
+      data : [{name:"Java lab session",venue:"ERP lab",date:"2020-10-19"},
       {name:"ANN lecture",venue:"Lecture hall-2",date:"2020-10-12"},
-      {name:"Embedded lab session",venue:"Hardware lab", date:"2020-10-15"},
+      {name:"Embedded session",venue:"Hardware lab", date:"2020-10-15"},
       {name:"SAIT lecture",venue:"New building auditorium",date:"2020-10-18"},
       {name:"MPI lecture",venue:"Parawiya hall", date:"2020-10-22"},
       ],
+      sessions:[],
       viewSessionName : "",
       viewSessionVenue : "",
       viewSessionDate : "",
-      exampleModal: false 
+      exampleModal: false,
+      search_key:"" 
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     if (window.Chart) {
       parseOptions(Chart, chartOptions());
     }
   }
+
   toggleNavs = (e, index) => {
     e.preventDefault();
     this.setState({
@@ -81,7 +94,26 @@ class Index extends React.Component {
     });
   };
 
+  handleChange(event) {
+    this.setState({search_key: event.target.value});
+  }
+  
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      sessions: this.state.search_key !="" ? this.state.data.filter(session => session.name.includes(this.state.search_key)) : this.state.data
+    })
+
+  }
+
+  componentDidMount(){
+    this.setState({
+      sessions:this.state.data
+    })
+  }
+
   render() {
+
     const sessionList = this.state.sessions.map((session) =>
     <Col lg="6" xl="3">
     <Card className="card-stats mb-4 mb-xl-0">
@@ -118,15 +150,29 @@ class Index extends React.Component {
 
     return (
       <>
-        {/* Card List */}
         <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
           <Container fluid>
             <div className="header-body">
+
+            {/* Search */}
+            <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" onSubmit={this.handleSubmit}>
+              <FormGroup className="mb-0">
+                <InputGroup className="input-group-alternative">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="fas fa-search" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input placeholder="Search" type="text" value={this.state.search_key} onChange={this.handleChange} />
+                </InputGroup>
+              </FormGroup>
+            </Form>
+
+            <br/>
+
               {/* Card stats */}
               <Row>
-
                 {sessionList}
-
               </Row>
             </div>
           </Container>
